@@ -1475,9 +1475,9 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 		//get nsfw tier
 		if (contentMessage == `${prefix}mynsfw`) {
 			if (__GLOBAL.NSFWBlocked.includes(threadID)) return api.sendMessage(getText('offNSFW'), threadID, messageID);
-			let tier = await Nsfw.getNSFW(senderID);
+			let { porn, hentai, tier } = await Nsfw.getNSFW(senderID);
 			if (tier == -1) api.sendMessage(getText('godmodeNSFW'), threadID, messageID);
-			else api.sendMessage(getText('myNSFW'), threadID, messageID);
+			else api.sendMessage(getText('myNSFW', tier, prefix, porn, hentai), threadID, messageID);
 			return;
 		}
 

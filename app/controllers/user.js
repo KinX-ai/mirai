@@ -5,7 +5,7 @@ module.exports = function ({ models, api, __GLOBAL }) {
 	function getText(...args) {
 		const langText = __GLOBAL.language.user;
 		const getKey = args[0];
-		if (!langText.hasOwnProperty(getKey)) throw `${__dirname} - Not found key language: ${getKey}`;
+		if (!langText.hasOwnProperty(getKey)) throw `${__filename} - Not found key language: ${getKey}`;
 		let text = langText[getKey].replace(/\\n/gi, '\n');
 		for (let i = 1; i < args.length; i++) text = text.replace(`%${i}`, args[i]);
 		return text;
@@ -13,8 +13,7 @@ module.exports = function ({ models, api, __GLOBAL }) {
 
 	async function createUser(uid) {
 		if (!await User.findOne({ where: { uid } })) {
-			let userInfo = await getInfo(uid);
-			var name = userInfo.name;
+			let name = (await getInfo(uid)).name;
 			var inventory = { "fish1": 0, "fish2": 0, "trashes": 0, "crabs": 0, "crocodiles": 0, "whales": 0, "dolphins": 0, "blowfishes": 0, "squids": 0, "sharks": 0, "exp": 0, "rod": 0, "durability": 0 };
 			var stats = { "casts": 0, ...inventory };
 			var [user, created] = await User.findOrCreate({ where: { uid }, defaults: { name, inventory, stats, reasonafk: '' } });

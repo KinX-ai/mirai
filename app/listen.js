@@ -18,7 +18,7 @@ module.exports = function ({ api, models, __GLOBAL }) {
 	const Rank = require("./controllers/rank")({ models, api });
 	const Economy = require("./controllers/economy")({ models, api });
 	const Fishing = require("./controllers/fishing")({ models, api });
-	const Nsfw = require("./controllers/nsfw")({ models, api, Economy, __GLOBAL });
+	const Nsfw = require("./controllers/nsfw")({ models, Economy, __GLOBAL });
 	const Image = require("./modules/image");
 
 	(async () => {

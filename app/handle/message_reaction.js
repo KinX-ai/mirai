@@ -34,7 +34,7 @@ module.exports = function ({ api, __GLOBAL, Economy, Fishing }) {
 						inventory.blowfishes = 0;
 						inventory.squids = 0;
 						inventory.sharks = 0;
-						api.sendMessage('🎣 | ' + getText('soldAll'), threadID, messageID);
+						api.sendMessage('🎣 | ' + getText('soldAll', money), threadID, messageID);
 						await Fishing.updateInventory(confirmMessage.author, inventory);
 						await Economy.addMoney(confirmMessage.author, money);
 					}

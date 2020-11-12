@@ -71,8 +71,8 @@ if (process.env.REFRESHING == 'on') setTimeout(() => {
 	cmd.run("pm2 restart 0");
 }, 600000);
 
+require('npmlog').pause();
 function facebook({ Op, models }) {
-	require('npmlog').info = () => {};
 	login({ appState: require(appStateFile), __GLOBAL }, (error, api) => {
 		if (error) return logger(error, 2);
 		fs.writeFileSync(appStateFile, JSON.stringify(api.getAppState(), null, "\t"));

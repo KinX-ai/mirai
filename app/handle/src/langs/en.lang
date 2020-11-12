@@ -17,7 +17,7 @@ fishing.sharks=Shark(s)
 # NSFW.js
 nsfw.tier5=You already in Tier 5.
 nsfw.notEnoughMoney=You don't have enough money. You need more %1 dollars to buy this.
-nsfw.purchaseSuccess=Successful purchase Tier %1!
+nsfw.purchaseSuccess=Purchased Tier %1 successfully!
 
 # Thread.js
 thread.newThread=New Group
@@ -191,7 +191,7 @@ message.cantFindHentai=Can't find this hentai.
 message.codeInfo=Title: %1\nAuthor(s): %2\nCharacter(s): %3\nTags: %4\nLink: %5
 message.exceededNSFW=You have run out of %1%2 uses. Upgrade to a higher NSFW Tier or wait until tomorrow.
 message.godmodeNSFW=You are in God Mode!\nYou will not be limited to using the NSFW command.
-message.myNSFW=Your NSFW Tier is %1.\n%1porn uses left is: %2\n%1hentai uses left is: %3
+message.myNSFW=Your NSFW Tier is %1.\n%2porn uses left is: %3\n%2hentai uses left is: %4
 message.cantBuyNSFW=You are in God Mode so you won't be able to buy NSFW Tier.
 message.nsfwTierLimit=NSFW Tier cannot be below -1 and above 5.
 message.gmConfig=You have not enabled NSFW God Mode in config.
@@ -284,9 +284,9 @@ reply.onlyOnOff=Only on/off.
 reply.same=Your configuration is same as before.
 reply.changedAutoRestart=Changed auto restart to: %1
 reply.sentNoti=Sent notification with content: %1
-reply.foundUsers=Found %1 user(s):%3
+reply.foundUsers=Found %1 user(s):%2
 reply.notFoundUser=Didn't find any users with this name:%1
-reply.foundThreads=Found %1 groups(s):%3
+reply.foundThreads=Found %1 groups(s):%2
 reply.notFoundThread=Didn't find any groups with this name:%1
 reply.outOfTime=You have run out of time to answer this question!
 reply.correctAns=Bing bong, your results are absolutely correct! You answered this question within %1 second(s).
