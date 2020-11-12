@@ -1484,7 +1484,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 		//buy nsfw tier
 		if (contentMessage == `${prefix}buynsfw`) {
 			if (__GLOBAL.NSFWBlocked.includes(threadID)) return api.sendMessage(getText('offNSFW'), threadID, messageID);
-			let tier = await Nsfw.getNSFW(senderID);
+			let { tier } = await Nsfw.getNSFW(senderID);
 			if (tier == -1) api.sendMessage(getText('cantBuyNSFW'), threadID, messageID);
 			else {
 				let buy = await Nsfw.buyNSFW(senderID);
