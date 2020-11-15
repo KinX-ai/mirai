@@ -1,6 +1,6 @@
 {
 	"name": "ProjectMiraiBeta",
-	"version": "4.7.0-25.6",
+	"version": "4.7.0-Finalizing",
 	"description": "Project Mirai sẽ biến tài khoản Facebook của bạn trở thành một con bot thú vị.",
 	"newDB": false,
 	"main": "index.js",
@@ -14,8 +14,8 @@
 	"keywords": [
 		"bot",
 		"facebook",
-		"projectmirai",
 		"messenger",
+		"projectmirai",
 		"mirai",
 		"catalizcs",
 		"spermlord"
