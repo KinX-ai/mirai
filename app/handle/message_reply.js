@@ -55,7 +55,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Fishing }) {
 						});
 					}
 					else if (body == '2') {
-						api.sendMessage(getText('askToChangeName', config.name), threadID, (err, info) => {
+						api.sendMessage(getText('askToChangeName', config.botName), threadID, (err, info) => {
 							if (err) throw err;
 							__GLOBAL.reply.push({
 								type: "admin_setName",
