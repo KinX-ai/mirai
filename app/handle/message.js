@@ -344,7 +344,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 			}
 			else if (content.indexOf("addUser") == 0) return api.addUserToGroup(arg, threadID);
 			else if (content.indexOf("restart") == 0) return api.sendMessage(getText('restart'), threadID, () => require("node-cmd").run("pm2 restart 0"), messageID);
-			else return api.sendMessage(getText('adminHelpInvalid'), threadID, messageID);
+			else return api.sendMessage(getText('adminHelpInvalid', prefix), threadID, messageID);
 		}
 
 		if (contentMessage.indexOf(`${prefix}levelup`) == 0) {
@@ -483,7 +483,17 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 				if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
 				else {
 					api.sendMessage(getText('processVA', 'Audio'), threadID);
-					ytdl(content, { filter: 'audioonly' }).pipe(fs.createWriteStream(__dirname + '/src/audio.mp3')).on('close', () => api.sendMessage({ attachment: fs.createReadStream(__dirname + '/src/audio.mp3') }, threadID, () => fs.unlinkSync(__dirname + '/src/audio.mp3'), messageID));
+					var ffmpeg = require('fluent-ffmpeg');
+					let ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+					ffmpeg.setFfmpegPath(ffmpegPath);
+					let id = content.slice(content.lastIndexOf('=') + 1, content.length);
+					let start = Date.now();
+					ffmpeg(ytdl(content, { filter: 'audioonly' })).save(__dirname + `/src/${id}.mp3`).on('end', () => {
+						api.sendMessage({
+							body: `Mất ${(Date.now() - start) / 1000}s để xử lý yêu cầu này.`,
+							attachment: fs.createReadStream(__dirname + `/src/${id}.mp3`)
+						}, threadID, () => fs.unlinkSync(__dirname + `/src/${id}.mp3`), messageID);
+					});
 				}
 			});
 		}

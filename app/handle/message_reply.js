@@ -380,7 +380,16 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Fishing }) {
 						if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
 						else {
 							api.sendMessage(getText('processVA', 'Audio'), threadID);
-							ytdl(link, { filter: 'audioonly' }).pipe(fs.createWriteStream(__dirname + '/src/audio.mp3')).on('close', () => api.sendMessage({ attachment: fs.createReadStream(__dirname + '/src/audio.mp3') }, threadID, () => fs.unlinkSync(__dirname + '/src/audio.mp3'), messageID));
+							var ffmpeg = require('fluent-ffmpeg');
+							let ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+							ffmpeg.setFfmpegPath(ffmpegPath);
+							let start = Date.now();
+							ffmpeg(ytdl(link, { filter: 'audioonly' })).save(__dirname + `/src/${replyMessage.url[body - 1]}.mp3`).on('end', () => {
+								api.sendMessage({
+									body: `Mất ${(Date.now() - start) / 1000}s để xử lý yêu cầu này.`,
+									attachment: fs.createReadStream(__dirname + `/src/${replyMessage.url[body - 1]}.mp3`)
+								}, threadID, () => fs.unlinkSync(__dirname + `/src/${replyMessage.url[body - 1]}.mp3`), messageID);
+							});
 						}
 					});
 				}

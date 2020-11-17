@@ -1,6 +1,6 @@
 {
 	"name": "ProjectMiraiBeta",
-	"version": "4.7.0-Finalizing",
+	"version": "4.7.0-Finalizing2",
 	"description": "Project Mirai sẽ biến tài khoản Facebook của bạn trở thành một con bot thú vị.",
 	"newDB": false,
 	"main": "index.js",
@@ -30,6 +30,7 @@
 		"node": "12.x"
 	},
 	"dependencies": {
+		"@ffmpeg-installer/ffmpeg": "",
 		"axios": "",
 		"caesar-salad": "",
 		"canvas": "",
@@ -40,6 +41,7 @@
 		"express": "",
 		"fca-unofficial": "",
 		"file-type": "",
+		"fluent-ffmpeg": "",
 		"fs-extra": "",
 		"jimp": "",
 		"md5": "",
@@ -50,9 +52,9 @@
 		"oauth": "",
 		"os-utils": "",
 		"parse-ms": "",
-		"pm2": "",
 		"pg": "",
 		"pg-hstore": "",
+		"pm2": "",
 		"readline": "",
 		"request": "",
 		"sagiri": "",
