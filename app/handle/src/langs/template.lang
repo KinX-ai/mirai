@@ -124,7 +124,6 @@ message.dieAPI=
 message.noVA=
 message.foundVA=
 message.exceededLength=
-message.processVA=
 message.allTags=
 message.invalidTag=
 message.replyPic=

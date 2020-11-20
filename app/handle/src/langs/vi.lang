@@ -126,7 +126,6 @@ message.dieAPI=Key API của bạn không sử dụng được
 message.noVA=Không có kết quả với từ khóa đó.
 message.foundVA=Có %1 kết quả, chọn 1 trong những kết quả dưới đây:\n\n%2
 message.exceededLength=Đã vượt quá độ dài cho phép của %1, tối đa là 6 phút!
-message.processVA=%1 đang được xử lý, thời lượng %1 dài có thể mất vài giây.
 message.allTags==== Tất cả các tag %1 ===\n%2
 message.invalidTag=Tag bạn đã nhập không hợp lệ. Nhập %1 để xem tất cả các thẻ.
 message.replyPic=Vui lòng bạn reply bức ảnh cần phải tìm!

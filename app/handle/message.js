@@ -482,17 +482,10 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 			return ytdl.getInfo(content).then(res => {
 				if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
 				else {
-					api.sendMessage(getText('processVA', 'Audio'), threadID);
-					var ffmpeg = require('fluent-ffmpeg');
-					let ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
-					ffmpeg.setFfmpegPath(ffmpegPath);
-					let id = content.slice(content.lastIndexOf('=') + 1, content.length);
-					let start = Date.now();
-					ffmpeg(ytdl(content, { filter: 'audioonly' })).save(__dirname + `/src/${id}.mp3`).on('end', () => {
-						api.sendMessage({
-							body: `Mất ${(Date.now() - start) / 1000}s để xử lý yêu cầu này.`,
-							attachment: fs.createReadStream(__dirname + `/src/${id}.mp3`)
-						}, threadID, () => fs.unlinkSync(__dirname + `/src/${id}.mp3`), messageID);
+					let id = res.videoDetails.videoId;
+					ytdl(content, { filter: format => format.itag == '140' }).pipe(fs.createWriteStream(__dirname + `/src/${id}.m4a`)).on('close', () => {
+						if (fs.statSync(__dirname + `/src/${id}.m4a`).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', threadID, messageID);
+						else api.sendMessage({ attachment: fs.createReadStream(__dirname + `/src/${id}.m4a`) }, threadID, () => fs.unlinkSync(__dirname + `/src/${id}.m4a`), messageID);
 					});
 				}
 			});
@@ -520,8 +513,11 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 			return ytdl.getInfo(content).then(res => {
 				if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
 				else {
-					api.sendMessage(getText('processVA', 'Video'), threadID);
-					ytdl(content).pipe(fs.createWriteStream(__dirname + '/src/video.mp4')).on('close', () => api.sendMessage({ attachment: fs.createReadStream(__dirname + '/src/video.mp4') }, threadID, () => fs.unlinkSync(__dirname + '/src/video.mp4'), messageID));
+					let id = res.videoDetails.videoId;
+					ytdl(content).pipe(fs.createWriteStream(__dirname + `/src/${id}.mp4`)).on('close', () => {
+						if (fs.statSync(__dirname + `/src/${id}.mp4`).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', threadID, messageID);
+						else api.sendMessage({ attachment: fs.createReadStream(__dirname + `/src/${id}.mp4`) }, threadID, () => fs.unlinkSync(__dirname + `/src/${id}.mp4`), messageID);
+					});
 				}
 			});
 		}

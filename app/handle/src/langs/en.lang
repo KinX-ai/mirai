@@ -126,7 +126,6 @@ message.dieAPI=Your API key is unusable.
 message.noVA=There are no result with that keyword.
 message.foundVA=Found %1 result(s), choose 1 of them below:\n\n%2
 message.exceededLength=%1 length exceeded allowed, maximum 6 minutes!
-message.processVA=%1 is being processed, long %1 may take several seconds.
 message.allTags==== All %1 tags ===\n%2
 message.invalidTag=The tag you entered is invalid. Type %1help %2.
 message.replyPic=Please reply to the message that contains image.

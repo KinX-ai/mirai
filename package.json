@@ -1,6 +1,6 @@
 {
 	"name": "ProjectMiraiBeta",
-	"version": "4.7.0-Finalizing2",
+	"version": "4.7.0-Finalizing3",
 	"description": "Project Mirai sẽ biến tài khoản Facebook của bạn trở thành một con bot thú vị.",
 	"newDB": false,
 	"main": "index.js",
