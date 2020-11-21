@@ -367,9 +367,9 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Fishing }) {
 					return ytdl.getInfo(link).then(res => {
 						if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
 						else {
-							ytdl(link).pipe(fs.createWriteStream(__dirname + `/src/${vID}.mp4`)).on('close', () => {
-								if (fs.statSync(__dirname + `/src/${vID}.mp4`).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', threadID, messageID);
-								else api.sendMessage({ attachment: fs.createReadStream(__dirname + `/src/${vID}.mp4`) }, threadID, () => fs.unlinkSync(__dirname + `/src/${vID}.mp4`), messageID);
+							ytdl(link).pipe(fs.createWriteStream(__dirname + `/src/${replyMessage.url[body - 1]}.mp4`)).on('close', () => {
+								if (fs.statSync(__dirname + `/src/${replyMessage.url[body - 1]}.mp4`).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', threadID, messageID);
+								else api.sendMessage({ attachment: fs.createReadStream(__dirname + `/src/${replyMessage.url[body - 1]}.mp4`) }, threadID, () => fs.unlinkSync(__dirname + `/src/${replyMessage.url[body - 1]}.mp4`), messageID);
 							});
 						}
 					});
@@ -381,9 +381,9 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Fishing }) {
 					return ytdl.getInfo(link).then(res => {
 						if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
 						else {
-							ytdl(link, { filter: format => format.itag == '140' }).pipe(fs.createWriteStream(__dirname + `/src/${vID}.m4a`)).on('close', () => {
-								if (fs.statSync(__dirname + `/src/${vID}.m4a`).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', threadID, messageID);
-								else api.sendMessage({ attachment: fs.createReadStream(__dirname + `/src/${vID}.m4a`) }, threadID, () => fs.unlinkSync(__dirname + `/src/${vID}.m4a`), messageID);
+							ytdl(link, { filter: format => format.itag == '140' }).pipe(fs.createWriteStream(__dirname + `/src/${replyMessage.url[body - 1]}.m4a`)).on('close', () => {
+								if (fs.statSync(__dirname + `/src/${replyMessage.url[body - 1]}.m4a`).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', threadID, messageID);
+								else api.sendMessage({ attachment: fs.createReadStream(__dirname + `/src/${replyMessage.url[body - 1]}.m4a`) }, threadID, () => fs.unlinkSync(__dirname + `/src/${replyMessage.url[body - 1]}.m4a`), messageID);
 							});
 						}
 					});
