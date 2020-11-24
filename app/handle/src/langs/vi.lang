@@ -21,13 +21,13 @@ nsfw.purchaseSuccess=Mua thành công cấp %1!
 
 # Thread.js
 thread.newThread=Nhóm mới
-thread.needAorO=Cần phải là 1 Array hoặc Object hoặc cả hai.
+thread.needAorO=Cần phải là 1 Mảng hoặc Đối tượng hoặc cả hai.
 thread.banThread=Cấm nhóm
 thread.unbanThread=Gỡ cấm nhóm
 
 # User.js
 user.newUser=Người dùng  mới
-user.needAorO=Cần phải là 1 Array hoặc Object hoặc cả hai.
+user.needAorO=Cần phải là 1 Mảng hoặc Đối tượng hoặc cả hai.
 user.banUser=Người dùng bị cấm
 user.unbanUser=Người dùng bị bỏ cấm
 
@@ -38,9 +38,9 @@ index.connectFailed=Không thể kết nối với cơ sở dữ liệu!
 
 # login.js
 login.2fa=Nhập mã xác thực 2 bước:
-login.appstate=Đã tạo thành công appstate
+login.appstate=Đã tạo thành công appstate.
 login.err2FA=Tài khoản Facebook của bạn sử dụng xác thực hai yếu tố, để có thể đăng nhập, vui lòng sử dụng 'node login' in terminal/cmd!
-login.wrongAorP=IThông tin đăng nhập không chính xác!
+login.wrongAorP=Thông tin đăng nhập không chính xác!
 login.cantLogin=Đã xảy ra lỗi khi đăng nhập vào tài khoản của bạn!
 login.noFunc=Không thể tìm thấy bất kỳ chức năng nào!
 
@@ -180,9 +180,9 @@ message.afk=Bạn đã bật chế độ AFK
 message.afkWithReason=Bạn đã bật chế độ AFK với lý do: %1
 message.osuErr=Thiếu tên người dùng!
 message.didntUnderstand=Tôi không hiểu bạn nhập gì.
-message.mirai=Tôi tên là Sumi.
+message.mirai=Tôi tên là Mirai.
 message.created=Tôi được tạo bởi CatalizCS và SpermLord.
-message.notSupportXYz=Phương trình hóa học rút gọn hiện không được hỗ trợ. Chuyển (XY) z sang dạng XzYz.
+message.notSupportXYz=Phương trình hóa học rút gọn hiện không được hỗ trợ. Chuyển (XY)z sang dạng XzYz.
 message.15secs==== Bạn có 15 giây để trả lời ===\n%1
 message.offNSFW=NSFW hiện đã bị vô hiệu hóa trong nhóm này.
 message.idealCode=Code lý tưởng là: %1

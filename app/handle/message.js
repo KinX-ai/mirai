@@ -1840,7 +1840,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 				if (inventory.rod == 0) return api.sendMessage(getText('noRod'), threadID, messageID);
 				let durability = ['50', '70', '100', '130', '200', '400'];
 				var total = inventory.trashes + inventory.fish1 * 30 + inventory.fish2 * 100 + inventory.crabs * 250 + inventory.blowfishes * 300 + inventory.crocodiles * 500 + inventory.whales * 750 + inventory.dolphins * 750 + inventory.squids * 1000 + inventory.sharks * 1000;
-				api.sendMessage(getText('inv1', inventory.rod, inventory.durability, durability[rodLevel]) + getText('inv2', inventory.trashes, inventory.fish1, inventory.fish2, inventory.crabs, inventory.blowfishes, inventory.crocodiles, inventory.whales, inventory.dolphins, inventory.squids, inventory.sharks) + getText('inv3', total), threadID, messageID);
+				api.sendMessage(getText('inv1', inventory.rod, inventory.durability, durability[rodLevel], inventory.exp, expToLevelup[inventory.rod]) + getText('inv2', inventory.trashes, inventory.fish1, inventory.fish2, inventory.crabs, inventory.blowfishes, inventory.crocodiles, inventory.whales, inventory.dolphins, inventory.squids, inventory.sharks) + getText('inv3', total), threadID, messageID);
 			}
 			else if (content.indexOf('sell') == 0) {
 				var choose = content.split(' ')[1];

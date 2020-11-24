@@ -76,9 +76,9 @@ function modules() {
 			child.stdout.on('end', resolve);
 			child.stderr.on('data', data => {
 				if (data.toLowerCase().includes('error')) {
-					console.error('[!] Đã có lỗi xảy ra. Vui lòng chụp lại lỗi và đăng vào mục Issue trên Github [!]');
+					console.error('[!] Đã có lỗi xảy ra. Vui lòng tạo bài đăng và gửi file updateErr.log ở mục Issue trên Github [!]');
 					data = data.replace(/\r?\n|\r/g, '');
-					console.error('Lỗi: ' + data);
+					fs.writeFileSync('updateErr.log', data);
 					reject();
 				}
 			});
@@ -95,7 +95,7 @@ async function finish() {
 	if (checkDB) console.log('>> Database cần phải thay đổi, bạn sẽ không thể sử dụng được database cũ <<');
 	else {
 		console.log('>> Database không cần phải thay đổi, bạn có thể tiếp tục sử dụng database cũ <<');
-		fs.copySync('./tmp/config/data.sqlite', './config/data.sqlite');
+		if (fs.existsSync('./tmp/config')) fs.copySync('./tmp/config', './config');
 	}
 	console.log('-> Đang hoàn tất');
 	fs.removeSync('./tmp/newVersion');
