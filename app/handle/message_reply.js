@@ -365,7 +365,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Fishing }) {
 					const ytdl = require("ytdl-core");
 					var link = `https://www.youtube.com/watch?v=${replyMessage.url[body - 1]}`
 					return ytdl.getInfo(link).then(res => {
-						if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
+						if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength', 'Video'), threadID, messageID);
 						else {
 							ytdl(link).pipe(fs.createWriteStream(__dirname + `/src/${replyMessage.url[body - 1]}.mp4`)).on('close', () => {
 								if (fs.statSync(__dirname + `/src/${replyMessage.url[body - 1]}.mp4`).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', threadID, messageID);
@@ -379,7 +379,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Fishing }) {
 					var ytdl = require("ytdl-core");
 					var link = `https://www.youtube.com/watch?v=${replyMessage.url[body - 1]}`
 					return ytdl.getInfo(link).then(res => {
-						if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
+						if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength', 'Video'), threadID, messageID);
 						else {
 							ytdl(link, { filter: format => format.itag == '140' }).pipe(fs.createWriteStream(__dirname + `/src/${replyMessage.url[body - 1]}.m4a`)).on('close', () => {
 								if (fs.statSync(__dirname + `/src/${replyMessage.url[body - 1]}.m4a`).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', threadID, messageID);
