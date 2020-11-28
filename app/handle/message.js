@@ -480,7 +480,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 				});
 			}
 			return ytdl.getInfo(content).then(res => {
-				if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
+				if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength', 'Audio'), threadID, messageID);
 				else {
 					let id = res.videoDetails.videoId;
 					ytdl(content, { filter: format => format.itag == '140' }).pipe(fs.createWriteStream(__dirname + `/src/${id}.m4a`)).on('close', () => {
@@ -511,7 +511,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 				});
 			}
 			return ytdl.getInfo(content).then(res => {
-				if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength'), threadID, messageID);
+				if (res.videoDetails.lengthSeconds > 600) return api.sendMessage(getText('exceededLength', 'Video'), threadID, messageID);
 				else {
 					let id = res.videoDetails.videoId;
 					ytdl(content).pipe(fs.createWriteStream(__dirname + `/src/${id}.mp4`)).on('close', () => {
