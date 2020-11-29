@@ -531,7 +531,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 				let sfwList = [];
 				Object.keys(data).forEach(endpoint => sfwList.push(endpoint));
 				let sfwTags = sfwList.join(', ');
-				return api.sendMessage(getText('allTags', sfwTags), threadID, messageID);
+				return api.sendMessage(getText('allTags', 'Anime', sfwTags), threadID, messageID);
 			}
 			return request(data[content], (error, response, body) => {
 				let picData = JSON.parse(body);
