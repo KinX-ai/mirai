@@ -251,8 +251,9 @@ message.sellAllItems=Bạn sẽ nhận được %1 đô la sau khi bán tất c�
 message.itemList==== Danh sách tiền của mọi loại cá ===\n1/ Rác: 1 đô\n2/ Cá bình thường: 30 đô\n3/ Cá hiếm: 100 đô\n4/ Cua: 250 đô\n5/ Cá nóc: 300 đô\n6/ Cá sấu: 500 đô\n7/ Cá voi: 750 đô\n8/ Cá heo: 750 đô\n9/ Mực: 1000 đô\n10/ Cá mập: 1000 đô
 message.stealFishCooldown=Bạn vừa ăn trộm, để tránh mất tất cả vật phẩm của mình, vui lòng quay lại sau: %1 phút %2 giây.
 message.intendSteal=Bạn định ăn cắp một %1, nhưng nạn nhân dường như chưa bắt được.
-message.stealFish=Bạn vừa trộm được một %2.
-message.stealFishFailed=Bạn đã bị bắt và mất tất cả các mặt hàng trong kho của bạn.
+message.stealFish=Bạn vừa trộm được một %1.
+message.stealFishFailed1=Người bạn định trộm đã khóa cửa rất cẩn thận, bạn đã không thể trộm được gì.
+message.stealFishFailed2=Bạn đã bị bắt và mất tất cả các mặt hàng trong kho của bạn.
 message.fishingShop=>> Cửa hàng câu cá <<\n---------------------\n[1] Nâng cấp cần câu\n[2] Sửa chữa cần câu\n[3] Mua cần câu mới\n[4] Mua mồi nhử\n[5] Nâng cấp mồi nhử
 message.cmdNotFound=Lệnh bạn đã nhập không tồn tại. Ý bạn là %1, phải không?
 message.keyboardHero=, cấp độ anh hùng bàn phím của bạn đã đạt đến cấp độ %1!

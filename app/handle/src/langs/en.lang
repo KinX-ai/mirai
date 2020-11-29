@@ -251,8 +251,9 @@ message.sellAllItems=You will receive %1 dollars after sell all items in your in
 message.itemList==== Money list of items ===\n1/ Trash: 1 dollar\n2/ Normal fish: 30 dollars\n3/ Rare fish: 100 dollars\n4/ Crab: 250 dollars\n5/ Blowfish: 300 dollars\n6/ Crocodile: 500 dollars\n7/ Whale: 750 dollars\n8/ Dolphin: 750 dollars\n9/ Squid: 1000 dollars\n10/ Shark: 1000 dollars
 message.stealFishCooldown=You just stole, to avoid losing all your items, please come back after: %1 minutes %2 seconds.
 message.intendSteal=You intend to steal a(n) %1, but the victim seems to didn't caught it yet.
-message.stealFish=You just stole a(n) %2.
-message.stealFishFailed=You have been arrested and lost all items in your inventory.
+message.stealFish=You just stole a(n) %1.
+message.stealFishFailed1=The person you were going to steal locked the door very carefully, you could not steal anything.
+message.stealFishFailed2=You have been arrested and lost all items in your inventory.
 message.fishingShop=>> Fishing Shop <<\n---------------------\n[1] Upgrade Rod\n[2] Repair Rod\n[3] Buy Rod\n[4] Buy Bait\n[5] Upgrade Bait
 message.cmdNotFound=The command you entered does not exist. You mean %1, right?
 message.keyboardHero=, your keyboard hero level has reached level %1!

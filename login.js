@@ -13,7 +13,7 @@ var rl = readline.createInterface({
 const option = {
 	logLevel: "silent",
 	forceLogin: true,
-	userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"
+	userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
 };
 
 //Hãy điền tài khoản và mật khẩu vào file .env sau khi đã đổi .env.example thành .env
@@ -23,15 +23,15 @@ const obj = {
 };
 
 var langText = {};
-var langFile = (fs.readFileSync(`./app/handle/src/langs/${process.env.LANGUAGE}.lang`, { encoding: 'utf-8' })).split('\n');
+var langFile = (fs.readFileSync(`./app/handle/src/langs/${process.env.LANGUAGE}.lang`, { encoding: 'utf-8' })).split(/\r?\n/);
 var langData = langFile.filter(item => item.indexOf('#') != 0 && item.indexOf('login.') == 0);
 for (let item of langData) {
 	let getSeparator = item.indexOf('=');
-	let itemHead = item.slice(0, getSeparator);
-	let itemBody = item.slice(getSeparator + 1, item.length);
-	let head = itemHead.slice(0, itemHead.indexOf('.'));
-	let key = itemHead.replace(head + '.', '');
-	let value = itemBody.replace(/\\n/gi, '\n');
+	let itemKey = item.slice(0, getSeparator);
+	let itemValue = item.slice(getSeparator + 1, item.length);
+	let head = itemKey.slice(0, itemKey.indexOf('.'));
+	let key = itemKey.replace(head + '.', '');
+	let value = itemValue.replace(/\\n/gi, '\n');
 	langText[key] = value;
 }
 
@@ -39,7 +39,7 @@ function getText(...args) {
 	const getKey = args[0];
 	if (!langText.hasOwnProperty(getKey)) throw `${__filename} - Not found key language: ${getKey}`;
 	let text = langText[getKey];
-	for (let i = 1; i < args.length; i++) {
+	for (let i = args.length; i > 0; i--) {
 		let regEx = RegExp(`%${i}`, 'g');
 		text = text.replace(regEx, args[i]);
 	}

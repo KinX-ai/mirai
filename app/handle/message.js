@@ -15,7 +15,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 		const getKey = args[0];
 		if (!langText.hasOwnProperty(getKey)) throw `${__filename} - Not found key language: ${getKey}`;
 		let text = langText[getKey];
-		for (let i = 1; i < args.length; i++) {
+		for (let i = args.length; i > 0; i--) {
 			let regEx = RegExp(`%${i}`, 'g');
 			text = text.replace(regEx, args[i]);
 		}
@@ -1839,8 +1839,9 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 			else if (content.indexOf('bag') == 0) {
 				if (inventory.rod == 0) return api.sendMessage(getText('noRod'), threadID, messageID);
 				let durability = ['50', '70', '100', '130', '200', '400'];
+				let expToLevelup = ['1000','2000','4000','6000','8000'];
 				var total = inventory.trashes + inventory.fish1 * 30 + inventory.fish2 * 100 + inventory.crabs * 250 + inventory.blowfishes * 300 + inventory.crocodiles * 500 + inventory.whales * 750 + inventory.dolphins * 750 + inventory.squids * 1000 + inventory.sharks * 1000;
-				api.sendMessage(getText('inv1', inventory.rod, inventory.durability, durability[rodLevel], inventory.exp, expToLevelup[inventory.rod]) + getText('inv2', inventory.trashes, inventory.fish1, inventory.fish2, inventory.crabs, inventory.blowfishes, inventory.crocodiles, inventory.whales, inventory.dolphins, inventory.squids, inventory.sharks) + getText('inv3', total), threadID, messageID);
+				api.sendMessage(getText('inv1', inventory.rod, inventory.durability, durability[rodLevel], inventory.exp, expToLevelup[inventory.rod - 1]) + getText('inv2', inventory.trashes, inventory.fish1, inventory.fish2, inventory.crabs, inventory.blowfishes, inventory.crocodiles, inventory.whales, inventory.dolphins, inventory.squids, inventory.sharks) + getText('inv3', total), threadID, messageID);
 			}
 			else if (content.indexOf('sell') == 0) {
 				var choose = content.split(' ')[1];
@@ -1920,8 +1921,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 				await Fishing.updateInventory(senderID, inventory);
 				await Economy.addMoney(senderID, money);
 			}
-			else if (content.indexOf("list") == 0)
-				return api.sendMessage(getText('itemList'), threadID, messageID);
+			else if (content.indexOf("list") == 0) return api.sendMessage(getText('itemList'), threadID, messageID);
 			else if (content.indexOf("steal") == 0) {
 				let cooldown = 1800000;
 				Fishing.getStealFishingTime(senderID).then(async function (lastStealFishing) {
@@ -1936,83 +1936,93 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 						let inventoryVictim = await Fishing.getInventory(victim);
 						let route = Math.floor(Math.random() * 3000);
 						let swap = Math.floor(Math.random() * 51);
-						if (victim == api.getCurrentUserID() || senderID == victim) return api.sendMessage(getText('needMoney'), threadID, messageID);
+						if (victim == api.getCurrentUserID() || senderID == victim) return api.sendMessage(getText('stealFishFailed1'), threadID, messageID);
 						else if (senderID != victim && victim != api.getCurrentUserID()) {
 							if (swap >= 0 && swap <= 50) {
 								if (route == 3000) {
-									if (inventoryVictim.sharks == 0) return api.sendMessage(getText('intendSteal', getText('sharks')), threadID, messageID);
+									let shark = getText('sharks').replace(/\(e?s\)/, '');
+									if (inventoryVictim.sharks == 0) return api.sendMessage(getText('intendSteal', shark), threadID, messageID);
 									else {
 										inventoryVictim.sharks -= 1;
 										inventoryStealer.sharks += 1;
-										api.sendMessage(getText('stealFish', getText('sharks')), threadID, messageID);
+										api.sendMessage(getText('stealFish', shark), threadID, messageID);
 									}
 								}
 								else if (route == 2999) {
-									if (inventoryVictim.squid == 0) return api.sendMessage(getText('intendSteal', getText('squids')), threadID, messageID);
+									let squid = getText('squids').replace(/\(e?s\)/, '');
+									if (inventoryVictim.squid == 0) return api.sendMessage(getText('intendSteal', squid), threadID, messageID);
 									else {
 										inventoryVictim.squid -= 1;
 										inventoryStealer.squid += 1;
-										api.sendMessage(getText('stealFish', getText('squids')), threadID, messageID);
+										api.sendMessage(getText('stealFish', squid), threadID, messageID);
 									}
 								}
 								else if (route == 2998) {
-									if (inventoryVictim.dolphins == 0) return api.sendMessage(getText('intendSteal', getText('dolphins')), threadID, messageID);
+									let dolphin = getText('dolphins').replace(/\(e?s\)/, '');
+									if (inventoryVictim.dolphins == 0) return api.sendMessage(getText('intendSteal', dolphin), threadID, messageID);
 									else {
 										inventoryVictim.dolphins -= 1;
 										inventoryStealer.dolphins += 1;
-										api.sendMessage(getText('stealFish', getText('dolphins')), threadID, messageID);
+										api.sendMessage(getText('stealFish', dolphin), threadID, messageID);
 									}
 								}
 								else if (route == 2997) {
-									if (inventoryVictim.whales == 0) return api.sendMessage(getText('intendSteal', getText('whales')), threadID, messageID);
+									let whale = getText('whales').replace(/\(e?s\)/, '');
+									if (inventoryVictim.whales == 0) return api.sendMessage(getText('intendSteal', whale), threadID, messageID);
 									else {
 										inventoryVictim.whales -= 1;
 										inventoryStealer.whales += 1;
-										api.sendMessage(getText('stealFish', getText('whales')), threadID, messageID);
+										api.sendMessage(getText('stealFish', whale), threadID, messageID);
 									}
 								}
 								else if (route == 2996) {
-									if (inventoryVictim.crocodiles == 0) return api.sendMessage(getText('intendSteal', getText('crocodiles')), threadID, messageID);
+									let crocodile = getText('crocodiles').replace(/\(e?s\)/, '');
+									if (inventoryVictim.crocodiles == 0) return api.sendMessage(getText('intendSteal', crocodile), threadID, messageID);
 									else {
 										inventoryVictim.crocodiles -= 1;
 										inventoryStealer.crocodiles += 1;
-										api.sendMessage(getText('stealFish', getText('crocodiles')), threadID, messageID);
+										api.sendMessage(getText('stealFish', crocodile), threadID, messageID);
 									}
 								}
 								else if (route == 2995) {
-									if (inventoryVictim.blowfish == 0) return api.sendMessage(getText('intendSteal', getText('blowfishes')), threadID, messageID);
+									let blowfish = getText('blowfishes').replace(/\(e?s\)/, '');
+									if (inventoryVictim.blowfish == 0) return api.sendMessage(getText('intendSteal', blowfish), threadID, messageID);
 									else {
 										inventoryVictim.blowfish -= 1;
 										inventoryStealer.blowfish += 1;
-										api.sendMessage(getText('stealFish', getText('blowfishes')), threadID, messageID);
+										api.sendMessage(getText('stealFish', blowfish), threadID, messageID);
 									}
 								}
 								else if (route == 2994) {
-									if (inventoryVictim.crabs == 0) return api.sendMessage(getText('intendSteal', getText('crabs')), threadID, messageID);
+									let crab = getText('crabs').replace(/\(e?s\)/, '');
+									if (inventoryVictim.crabs == 0) return api.sendMessage(getText('intendSteal', crab), threadID, messageID);
 									else {
 										inventoryVictim.crabs -= 1;
 										inventoryStealer.crabs += 1;
-										api.sendMessage(getText('stealFish', getText('crabs')), threadID, messageID);
+										api.sendMessage(getText('stealFish', crab), threadID, messageID);
 									}
 								}
 								else if (route >= 2000 && route < 2994) {
-									if (inventoryVictim.fish2 == 0) return api.sendMessage(getText('intendSteal', getText('fish2')), threadID, messageID);
+									let fish2 = getText('fish2').replace(/\(e?s\)/, '');
+									if (inventoryVictim.fish2 == 0) return api.sendMessage(getText('intendSteal', fish2), threadID, messageID);
 									else {
 										inventoryVictim.fish2 -= 1;
 										inventoryStealer.fish2 += 1;
-										api.sendMessage(getText('stealFish', getText('fish2')), threadID, messageID);
+										api.sendMessage(getText('stealFish', fish2), threadID, messageID);
 									}
 								}
 								else if (route >= 1000 && route < 2000) {
-									if (inventoryVictim.fish1 == 0) return api.sendMessage(getText('intendSteal', getText('fish1')), threadID, messageID);
+									let fish1 = getText('fish1').replace(/\(e?s\)/, '');
+									if (inventoryVictim.fish1 == 0) return api.sendMessage(getText('intendSteal', fish1), threadID, messageID);
 									else {
 										inventoryVictim.fish1 -= 1;
 										inventoryStealer.fish1 += 1;
-										api.sendMessage(getText('stealFish', getText('fish1')), threadID, messageID);
+										api.sendMessage(getText('stealFish', fish1), threadID, messageID);
 									}
 								}
 								else if (route >= 0 && route < 1000) {
-									if (inventoryVictim.trash == 0) return api.sendMessage(getText('intendSteal', getText('trashes') + ' (?)'), threadID, messageID);
+									let trash = getText('trashes').replace(/\(e?s\)/, '');
+									if (inventoryVictim.trash == 0) return api.sendMessage(getText('intendSteal', trash + ' (?)'), threadID, messageID);
 									else {
 										inventoryVictim.trash -= 1;
 										inventoryStealer.trash += 1;
@@ -2033,7 +2043,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 								inventoryStealer.blowfish = 0;
 								inventoryStealer.squid = 0;
 								inventoryStealer.sharks = 0;
-								api.sendMessage(getText('stealFishFailed'), threadID, messageID);
+								api.sendMessage(getText('stealFishFailed2'), threadID, messageID);
 								await Fishing.updateInventory(senderID, inventoryStealer);
 							}
 						}

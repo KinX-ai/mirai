@@ -4,7 +4,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread }) {
 		const getKey = args[0];
 		if (!langText.hasOwnProperty(getKey)) throw `${__filename} - Not found key language: ${getKey}`;
 		let text = langText[getKey];
-		for (let i = 1; i < args.length; i++) {
+		for (let i = args.length; i > 0; i--) {
 			let regEx = RegExp(`%${i}`, 'g');
 			text = text.replace(regEx, args[i]);
 		}
@@ -32,9 +32,11 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread }) {
 						memLength.push(threadInfo.participantIDs.length - i);
 					}
 				}
-				memLength.sort((a, b) => a - b);
-				var body = getText('welcome', nameArray.join(', '), threadName, memLength.join(', '));
-				api.sendMessage({ body, mentions }, event.threadID);
+				if (memLength.length != 0 || nameArray.length != 0) {
+					memLength.sort((a, b) => a - b);
+					var body = getText('welcome', nameArray.join(', '), threadName, memLength.join(', '));
+					api.sendMessage({ body, mentions }, event.threadID);
+				}
 				break;
 			case "log:unsubscribe":
 				if (event.author == event.logMessageData.leftParticipantFbId) api.sendMessage(getText('left', event.logMessageBody.split(' đã rời khỏi nhóm.' || ' left the group.')[0]), event.threadID);

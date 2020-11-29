@@ -37,15 +37,15 @@ const __GLOBAL = new Object({
 });
 
 //Pick the language
-var langFile = (fs.readFileSync(`./app/handle/src/langs/${process.env.LANGUAGE}.lang`, { encoding: 'utf-8' })).split('\n');
+var langFile = (fs.readFileSync(`./app/handle/src/langs/${process.env.LANGUAGE}.lang`, { encoding: 'utf-8' })).split(/\r?\n/);
 var langData = langFile.filter(item => item.indexOf('#') != 0 && item != '');
 for (let item of langData) {
 	let getSeparator = item.indexOf('=');
-	let itemHead = item.slice(0, getSeparator);
-	let itemBody = item.slice(getSeparator + 1, item.length);
-	let head = itemHead.slice(0, itemHead.indexOf('.'));
-	let key = itemHead.replace(head + '.', '');
-	let value = itemBody.replace(/\\n/gi, '\n');
+	let itemKey = item.slice(0, getSeparator);
+	let itemValue = item.slice(getSeparator + 1, item.length);
+	let head = itemKey.slice(0, itemKey.indexOf('.'));
+	let key = itemKey.replace(head + '.', '');
+	let value = itemValue.replace(/\\n/gi, '\n');
 	__GLOBAL.language[head][key] = value;
 }
 
@@ -54,7 +54,7 @@ function getText(...args) {
 	const getKey = args[0];
 	if (!langText.hasOwnProperty(getKey)) throw `${__filename} - Not found key language: ${getKey}`;
 	let text = langText[getKey];
-	for (let i = 1; i < args.length; i++) {
+	for (let i = args.length; i > 0; i--) {
 		let regEx = RegExp(`%${i}`, 'g');
 		text = text.replace(regEx, args[i]);
 	}
