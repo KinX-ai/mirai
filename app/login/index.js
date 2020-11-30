@@ -15,7 +15,7 @@ module.exports = async function ({ appState, __GLOBAL }, callback) {
 	if (typeof callback !== "function") return console.error(getText('noFunc'));
 	let api;
 	try {
-		api = await login({ appState, getText });
+		api = await login(appState, getText);
 		callback(undefined, api);
 	}
 	catch (e) {

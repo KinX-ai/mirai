@@ -162,7 +162,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 				);
 			}
 			else if (content.indexOf("help") == 0) {
-				if (helpList.some(item => item.name == arg)) return api.sendMessage(getText('adminHelpCmd', helpList.find(item => item.name == arg).name, helpList.find(item => item.name == arg).decs, prefix + helpList.find(item => item.name == arg).usage, prefix + helpList.find(item => item.name == arg).example), threadID, messageID);
+				if (helpList.some(item => item.name == arg)) return api.sendMessage(getText('adminHelpCmd', helpList.find(item => item.name == arg).name, helpList.find(item => item.name == arg).desc, prefix + helpList.find(item => item.name == arg).usage, prefix + helpList.find(item => item.name == arg).example), threadID, messageID);
 				else return api.sendMessage(getText('adminHelpInvalid', prefix), threadID, messageID);
 			}
 			else if (content.indexOf("all") == 0) {
@@ -382,7 +382,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 			}
 			else {
 				if (helpList.some(item => item.name == content))
-					return api.sendMessage(getText('helpInfo', helpList.find(item => item.name == content).name, helpList.find(item => item.name == content).group, prefix + helpList.find(item => item.name == content).usage, prefix + helpList.find(item => item.name == content).example), threadID, messageID);
+					return api.sendMessage(getText('helpInfo', helpList.find(item => item.name == content).name, helpList.find(item => item.name == content).desc, prefix + helpList.find(item => item.name == content).usage, prefix + helpList.find(item => item.name == content).example), threadID, messageID);
 				else return api.sendMessage(getText('generalHelpInvalid', prefix), threadID, messageID);
 			}
 		}
