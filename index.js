@@ -37,7 +37,7 @@ const __GLOBAL = new Object({
 });
 
 //Pick the language
-var langFile = (fs.readFileSync(`./app/handle/src/langs/${process.env.LANGUAGE}.lang`, { encoding: 'utf-8' })).split(/\r?\n/);
+var langFile = (fs.readFileSync(`./app/handle/src/langs/${process.env.LANGUAGE}.lang`, { encoding: 'utf-8' })).split(/\r?\n|\r/);
 var langData = langFile.filter(item => item.indexOf('#') != 0 && item != '');
 for (let item of langData) {
 	let getSeparator = item.indexOf('=');

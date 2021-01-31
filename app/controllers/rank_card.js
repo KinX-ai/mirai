@@ -29,7 +29,7 @@ module.exports = async function (data) {
 	let pathImg = __root + `/rank_card/rank_${id}.png`;
 
 	let avatar = __root + `/rank_card/avt_${id}.png`;
-	let getAvatar = (await axios.get(`https://graph.facebook.com/${id}/picture?width=512&height=512`, { responseType: 'arraybuffer' })).data;
+	let getAvatar = (await axios.get(`https://graph.facebook.com/${id}/picture?width=512&height=512`, { responseType: 'arraybuffer' })).data; //Need to rework
 	fs.writeFileSync(avatar, Buffer.from(getAvatar, 'utf-8'));
 
 	const canvas = Canvas.createCanvas(934, 282);

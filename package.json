@@ -1,6 +1,6 @@
 {
-	"name": "projectmirai-beta",
-	"version": "4.7.1",
+	"name": "project-mirai-beta",
+	"version": "4.7.2",
 	"description": "Project Mirai sẽ biến tài khoản Facebook của bạn trở thành một con bot thú vị.",
 	"newDB": false,
 	"main": "index.js",
@@ -20,7 +20,7 @@
 		"catalizcs",
 		"spermlord"
 	],
-	"author": "roxtigger2003 & SpermLord",
+	"author": "CatalizCS & SpermLord",
 	"license": "GPL-3.0",
 	"bugs": {
 		"url": "https://github.com/catalizcs/mirai-beta/issues"

@@ -92,7 +92,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 		}
 
 		//sim on/off
-		if (__GLOBAL.simOn.includes(threadID) && senderID != api.getCurrentUserID()) request(`http://195.201.173.201:26880/sim/${encodeURIComponent(contentMessage)}`, (err, response, body) => api.sendMessage((JSON.parse(body).out != '') ? JSON.parse(body).out : getText('noAnswer'), threadID, messageID));
+		if (__GLOBAL.simOn.includes(threadID) && senderID != api.getCurrentUserID()) axios.get(`http://api.simsimi.tk/sim/${encodeURIComponent(contentMessage)}`,  {headers: { "User-Agent": "Project Mirai"}}).then(body => api.sendMessage((body.data.out != 'Em không hiểu gì hết trơn á') ? body.data.out : getText('noAnswer'), threadID, messageID));
 
 		//Get cmds.json
 		var nocmdData = JSON.parse(fs.readFileSync(__dirname + "/src/cmds.json"));
@@ -941,7 +941,7 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 		}
 
 		//simsimi
-		if (contentMessage.indexOf(`${prefix}sim`) == 0) return request(`http://195.201.173.201:26880/sim/${encodeURIComponent(contentMessage.slice(prefix.length + 4, contentMessage.length))}`, (err, response, body) => api.sendMessage((JSON.parse(body).out != '') ? JSON.parse(body).out : getText('noAnswer'), threadID, messageID));
+		if (contentMessage.indexOf(`${prefix}sim`) == 0) return axios.get(`http://api.simsimi.tk/sim/${encodeURIComponent(contentMessage.slice(prefix.length + 4, contentMessage.length))}`,  {headers: { "User-Agent": "Project Mirai"}}).then(body => api.sendMessage((body.data.out != 'Em không hiểu gì hết trơn á') ? body.data.out : getText('noAnswer'), threadID, messageID));
 
 		//mit
 		if (contentMessage.indexOf(`${prefix}mit`) == 0) return request(`https://kakko.pandorabots.com/pandora/talk-xml?input=${encodeURIComponent(contentMessage.slice(prefix.length + 4, contentMessage.length))}&botid=9fa364f2fe345a10&custid=${senderID}`, (err, response, body) => api.sendMessage((/<that>(.*?)<\/that>/.exec(body)[1]), threadID, messageID));
@@ -1047,12 +1047,12 @@ module.exports = function ({ api, config, __GLOBAL, User, Thread, Rank, Economy,
 		}
 
 		//cập nhật tình hình dịch
-		if (contentMessage == `${prefix}covid-19`)
-			return request("https://code.junookyo.xyz/api/ncov-moh/data.json", (err, response, body) => {
-				if (err) throw err;
-				var data = JSON.parse(body);
-				api.sendMessage(getText('covid', data.data.global.cases, data.data.global.deaths, data.data.global.recovered, data.data.vietnam.cases, data.data.vietnam.deaths, data.data.vietnam.recovered), threadID, messageID);
-			});
+		if (contentMessage == `${prefix}covid-19`) {
+			return (async () => {
+				let { data } = await axios.get('https://www.spermlord.ml/covid');
+				return api.sendMessage(getText('covid', data.thegioi.nhiem, data.thegioi.tuvong, data.thegioi.hoiphuc, data.vietnam.nhiem, data.vietnam.tuvong, data.vietnam.hoiphuc), threadID, messageID);
+			})();
+		}
 
 		//chọn
 		if (contentMessage.indexOf(`${prefix}choose`) == 0) {
